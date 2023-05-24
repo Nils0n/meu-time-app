@@ -10,7 +10,7 @@ const CustomInput: FunctionComponent<ICustomInputProps> = React.forwardRef(
 	(props, ref) => {
 		return (
 			<>
-				<CustomInputContainer {...props} ref={ref as any} />;
+				<CustomInputContainer {...props} ref={ref as any} />
 				<InputErrorMessageContainer>{props?.helpertext}</InputErrorMessageContainer>
 			</>
 		)
