@@ -63,6 +63,7 @@ function UserContextProvider({ children }: UserContextProviderProps) {
 
 		} catch (error: any) {
 			console.log(error);
+			setKey('');
 
 			switch (error?.response?.status) {
 				case 404:
