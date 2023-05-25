@@ -11,6 +11,7 @@ export const HeaderContainer = styled.div`
   color: ${Colors.text.white};
 	display: flex;
 	justify-content: space-between;
+	position: fixed;
 `;
 
 export const HeaderTitle = styled.h2`
