@@ -7,7 +7,7 @@ import { HeaderContainer, HeaderItem, HeaderItemContainer, HeaderTitle, Items } 
 
 function Header() {
 	const navigate = useNavigate();
-	const { isAuthenticated, currentUser, logout } = useContext(UserContext);
+	const { isAuthenticated, logout } = useContext(UserContext);
 
 	return (
 		<HeaderContainer>
@@ -18,9 +18,6 @@ function Header() {
 			{isAuthenticated &&
 				<HeaderItemContainer>
 					<Items>
-						<HeaderItem>
-							{`${currentUser?.firstname} ${currentUser?.lastname}`}
-						</HeaderItem>
 						<HeaderItem onClick={logout}>
 							Sair
 						</HeaderItem>

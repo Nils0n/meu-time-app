@@ -3,16 +3,18 @@ import { ToastContainer, toast } from 'react-toastify';
 
 import api from '../../service/api';
 
-type CurrentUserProps = {
-	firstname: string;
-	lastname: string;
+type CountryProps = {
+	name: string;
+	code?: string;
+	flag?: string;
 }
+
 
 type UserContextProps = {
 	key: string;
 	login: (key: string) => void;
 	logout: () => void;
-	currentUser: CurrentUserProps | null;
+	countries: CountryProps[] | [];
 	isAuthenticated: boolean;
 }
 
@@ -24,44 +26,54 @@ export const UserContext = createContext<UserContextProps>({
 	key: '',
 	login: (currentKey) => ({}),
 	logout: () => ({}),
-	currentUser: null,
+	countries: [],
 	isAuthenticated: false
 });
 
 
 function UserContextProvider({ children }: UserContextProviderProps) {
 	const [key, setKey] = useState('');
-	const [currentUser, setCurrentUser] = useState<CurrentUserProps | null>(null);
-	const isAuthenticated = currentUser !== null;
+	const [countries, setCountries] = useState<CountryProps[] | []>([]);
+	const isAuthenticated = countries.length !== 0;
 
 
 	async function login(currentKey: string) {
-		setCurrentUser({ firstname: 'nilson', lastname: 'batista' });
-		return;
 		if (!currentKey) return;
 
 		try {
-			const { data } = await api.get('/status', {
+			const { data } = await api.get('/countries', {
 				headers: {
 					'Content-Type': 'application/json',
-					'x-rapidapi-key': `${currentKey}`
+					'x-rapidapi-key': `${currentKey}`,
+					'x-rapidapi-host': 'api-football-v1.p.rapidapi.com'
 				}
 			})
 
-
-			if (data.subscription.active) {
-				toast.success(`Bem vindo ao App Meu Time ${data?.account.firstname}`);
-				setKey(currentKey);
-				setCurrentUser({
-					firstname: data?.account?.firstname,
-					lastname: data?.account?.lastname
+			if (data?.length !== 0) {
+				toast.success(`Bem vindo ao App Meu Time!`, {
+					position: "top-center",
+					autoClose: 2000,
+					closeOnClick: true,
+					pauseOnHover: true,
+					theme: "light",
 				});
+				setKey(currentKey);
+				setCountries(data);
 			}
 
 		} catch (error: any) {
 			console.log(error);
 
 			switch (error?.response?.status) {
+				case 404:
+					toast.error('Endpoint não encontrado!', {
+						position: "top-center",
+						autoClose: 2000,
+						closeOnClick: true,
+						pauseOnHover: true,
+						theme: "light",
+					});
+					break;
 				case 403:
 					toast.error('Você não está cadastrado na API Futeboll!', {
 						position: "top-center",
@@ -95,11 +107,11 @@ function UserContextProvider({ children }: UserContextProviderProps) {
 
 	function logout() {
 		setKey('');
-		setCurrentUser(null);
+		setCountries([]);
 	}
 
 	return (
-		<UserContext.Provider value={{ key, currentUser, isAuthenticated, login, logout }}>
+		<UserContext.Provider value={{ key, countries, isAuthenticated, login, logout }}>
 			{children}
 			<ToastContainer />
 		</UserContext.Provider>
