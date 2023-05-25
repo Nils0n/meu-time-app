@@ -36,7 +36,7 @@ export const HeaderItem = styled.div`
   align-items: center;
 
 
-  &:hover{
+  &:hover:nth-child(2){
     text-decoration: underline;
     cursor: pointer;
   }
