@@ -1,14 +1,38 @@
 
 
 import { FiLogIn } from 'react-icons/fi';
+import { useState, useContext } from 'react';
+
 
 import CustomButton from '../../components/CustomButton';
 import CustomInput from '../../components/CustomInput';
 
 import { LoginContainer, LoginHeadline, LoginInputContainer, LoginSubtitle, LoginContent } from './styles';
+import { UserContext } from '../../contexts/UserContext';
+import { toast } from 'react-toastify';
 
 function Login() {
+	const [currentKey, setCurrentKey] = useState('');
+	const { validateKey } = useContext(UserContext);
 
+	async function onSubmit() {
+		try {
+
+			if (currentKey.trim() === '') {
+				toast.warning('Informe a key!', {
+					position: "top-center",
+					autoClose: 2000,
+					closeOnClick: true,
+					pauseOnHover: true,
+					theme: "light",
+				});
+				return;
+			}
+			validateKey(currentKey);
+		} catch (error) {
+			console.log(error);
+		}
+	}
 
 	return (
 		<>
@@ -21,11 +45,13 @@ function Login() {
 					<LoginInputContainer>
 						<CustomInput
 							placeholder='Informe sua key'
+							onChange={e => setCurrentKey(e.target.value)}
 						/>
 					</LoginInputContainer>
 
 					<CustomButton
 						startIcon={<FiLogIn size={18} />}
+						onClick={onSubmit}
 					>
 						Entrar
 					</CustomButton>
@@ -37,6 +63,7 @@ function Login() {
 
 				</LoginContent>
 			</LoginContainer >
+			t
 		</>
 	);
 }
