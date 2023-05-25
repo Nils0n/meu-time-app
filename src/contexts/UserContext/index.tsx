@@ -1,13 +1,19 @@
 import { createContext, ReactNode, useState } from 'react';
-import { FiLogOut } from 'react-icons/fi';
 import { ToastContainer, toast } from 'react-toastify';
+
 import api from '../../service/api';
 
+type CurrentUserProps = {
+	firstname: string;
+	lastname: string;
+}
 
 type UserContextProps = {
 	key: string;
-	validateKey: (key: string) => void;
+	login: (key: string) => void;
 	logout: () => void;
+	currentUser: CurrentUserProps | null;
+	isAuthenticated: boolean;
 }
 
 type UserContextProviderProps = {
@@ -16,15 +22,22 @@ type UserContextProviderProps = {
 
 export const UserContext = createContext<UserContextProps>({
 	key: '',
-	validateKey: (currentKey) => ({}),
-	logout: () => ({})
+	login: (currentKey) => ({}),
+	logout: () => ({}),
+	currentUser: null,
+	isAuthenticated: false
 });
 
 
 function UserContextProvider({ children }: UserContextProviderProps) {
 	const [key, setKey] = useState('');
+	const [currentUser, setCurrentUser] = useState<CurrentUserProps | null>(null);
+	const isAuthenticated = currentUser !== null;
 
-	async function validateKey(currentKey: string) {
+
+	async function login(currentKey: string) {
+		setCurrentUser({ firstname: 'nilson', lastname: 'batista' });
+		return;
 		if (!currentKey) return;
 
 		try {
@@ -35,11 +48,14 @@ function UserContextProvider({ children }: UserContextProviderProps) {
 				}
 			})
 
-			console.log(data);
 
 			if (data.subscription.active) {
 				toast.success(`Bem vindo ao App Meu Time ${data?.account.firstname}`);
 				setKey(currentKey);
+				setCurrentUser({
+					firstname: data?.account?.firstname,
+					lastname: data?.account?.lastname
+				});
 			}
 
 		} catch (error: any) {
@@ -79,10 +95,11 @@ function UserContextProvider({ children }: UserContextProviderProps) {
 
 	function logout() {
 		setKey('');
+		setCurrentUser(null);
 	}
 
 	return (
-		<UserContext.Provider value={{ key, validateKey, logout }}>
+		<UserContext.Provider value={{ key, currentUser, isAuthenticated, login, logout }}>
 			{children}
 			<ToastContainer />
 		</UserContext.Provider>
