@@ -9,6 +9,8 @@ export const HomeContainer = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
+	margin-top:3rem;
+	padding-top:2rem;
   justify-content: center;
 
 `;

@@ -2,6 +2,7 @@ import Select from 'react-select';
 import { BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Bar } from 'recharts';
 
 import CustomTable from '../../components/CustomTable';
+import GridDashboard from '../../components/GridDashboard';
 import LineUps from '../../components/LineUps';
 import Colors from '../../theme/theme.colors';
 
@@ -79,15 +80,21 @@ function Home() {
 					<LineUps nameImage='5-3-2' />
 				</ContainerPlayers>
 
+				<ContainerPlayers>
 
-				<BarChart width={540} height={250} data={data}>
-					<CartesianGrid strokeDasharray="3 3" />
-					<XAxis dataKey="name" />
-					<YAxis />
-					<Tooltip />
-					<Legend />
-					<Bar dataKey="total gols" fill={Colors.background.blue} />
-				</BarChart>
+					<BarChart width={540} height={350} data={data}>
+						<CartesianGrid strokeDasharray="3 3" />
+						<XAxis dataKey="name" />
+						<YAxis />
+						<Tooltip />
+						<Legend />
+						<Bar dataKey="total gols" fill={Colors.background.blue} />
+					</BarChart>
+
+					<GridDashboard />
+				</ContainerPlayers>
+
+
 			</HomeContent>
 		</HomeContainer>
 	)
