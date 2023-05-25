@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import Colors from '../../theme/theme.colors';
 
 type FlagProps = {
-	backgroundImage?: string;
+	backgroundimage?: string;
 }
 
 export const HomeContainer = styled.div`
@@ -65,7 +65,7 @@ export const Flag = styled.div<FlagProps>`
 	height: 8rem;
 	width: 100%;
 	margin-top:0.5rem;
-	background-image: ${(props) => `url('${props?.backgroundImage}')`};
+	background-image: ${(props) => `url('${props?.backgroundimage}')`};
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;
