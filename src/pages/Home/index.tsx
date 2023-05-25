@@ -29,25 +29,25 @@ function Home() {
 					<ItemSelect>
 						<label>Selecione o País</label>
 						<Select options={options} />
-						<Flag backgroundImage='https://images.pexels.com/photos/1182825/pexels-photo-1182825.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260' />
+						<Flag backgroundimage='https://images.pexels.com/photos/1182825/pexels-photo-1182825.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260' />
 					</ItemSelect>
 
 					<ItemSelect>
 						<label>Selecione a temporada</label>
 						<Select options={options} />
-						<Flag backgroundImage='https://images.pexels.com/photos/1182825/pexels-photo-1182825.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260' />
+						<Flag backgroundimage='https://images.pexels.com/photos/1182825/pexels-photo-1182825.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260' />
 					</ItemSelect>
 
 					<ItemSelect>
 						<label>Selecione a liga</label>
 						<Select options={options} />
-						<Flag backgroundImage='https://images.pexels.com/photos/1182825/pexels-photo-1182825.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260' />
+						<Flag backgroundimage='https://images.pexels.com/photos/1182825/pexels-photo-1182825.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260' />
 					</ItemSelect>
 
 					<ItemSelect>
 						<label>Selecione o Time</label>
 						<Select options={options} />
-						<Flag backgroundImage='https://images.pexels.com/photos/1182825/pexels-photo-1182825.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260' />
+						<Flag backgroundimage='https://images.pexels.com/photos/1182825/pexels-photo-1182825.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260' />
 					</ItemSelect>
 
 				</ContainerSelects>
