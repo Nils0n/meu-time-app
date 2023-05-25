@@ -167,11 +167,16 @@ function Home() {
 			})) as any;
 
 			setDataDashboard(dataDash);
-			const lineups = data.response?.lineups?.reduce(
-				(accuMulator, currentValue) => accuMulator?.played < currentValue?.played ? currentValue : accuMulator
-			);
 
-			setMostUsedLineUp(lineups?.formation);
+			if (data.response?.lineups?.length > 0) {
+				const lineups = data.response?.lineups?.reduce(
+					(accuMulator, currentValue) => accuMulator?.played < currentValue?.played ? currentValue : accuMulator
+				);
+
+				setMostUsedLineUp(lineups?.formation);
+			} else {
+				setMostUsedLineUp('sem dados');
+			}
 
 		} catch (error) {
 			console.log(error);
@@ -179,6 +184,9 @@ function Home() {
 	}
 
 
+	async function getPlayers() {
+
+	}
 
 	useEffect(() => {
 		if (country) {
