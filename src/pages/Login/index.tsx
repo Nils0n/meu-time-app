@@ -1,7 +1,8 @@
 
 
 import { FiLogIn } from 'react-icons/fi';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 import CustomButton from '../../components/CustomButton';
@@ -13,7 +14,8 @@ import { toast } from 'react-toastify';
 
 function Login() {
 	const [currentKey, setCurrentKey] = useState('');
-	const { validateKey } = useContext(UserContext);
+	const { login, isAuthenticated } = useContext(UserContext);
+	const navigate = useNavigate();
 
 	async function onSubmit() {
 		try {
@@ -28,11 +30,18 @@ function Login() {
 				});
 				return;
 			}
-			validateKey(currentKey);
+
+			login(currentKey);
 		} catch (error) {
 			console.log(error);
 		}
 	}
+
+	useEffect(() => {
+		if (isAuthenticated) {
+			navigate('/');
+		}
+	}, [isAuthenticated])
 
 	return (
 		<>
