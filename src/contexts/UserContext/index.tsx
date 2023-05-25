@@ -43,9 +43,7 @@ function UserContextProvider({ children }: UserContextProviderProps) {
 		try {
 			const { data } = await api.get('/countries', {
 				headers: {
-					'Content-Type': 'application/json',
 					'x-rapidapi-key': `${currentKey}`,
-					'x-rapidapi-host': 'api-football-v1.p.rapidapi.com'
 				}
 			})
 
@@ -58,7 +56,7 @@ function UserContextProvider({ children }: UserContextProviderProps) {
 					theme: "light",
 				});
 				setKey(currentKey);
-				setCountries(data);
+				setCountries(data.response);
 			}
 
 		} catch (error: any) {
