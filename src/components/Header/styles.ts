@@ -22,7 +22,7 @@ export const HeaderTitle = styled.h2`
 
 export const HeaderItemContainer = styled.div`
 	display: flex;
-	gap:2rem;
+	gap:1rem;
 	align-items: center;
 `;
 
@@ -33,11 +33,11 @@ export const Items = styled.div`
 
 export const HeaderItem = styled.div`
   font-weight: 600;
-  font-size: 0.75rem;
+  font-size: 1rem;
   align-items: center;
 
 
-  &:hover:nth-child(2){
+  &:hover{
     text-decoration: underline;
     cursor: pointer;
   }

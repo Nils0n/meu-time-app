@@ -72,6 +72,11 @@ export const Flag = styled.div<FlagProps>`
 	background-position: center;
 	background-size: cover;
 	border-radius:10px;
+	font-weight: 900;
+	font-size:3rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 
 `;
 

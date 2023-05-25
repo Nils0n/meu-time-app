@@ -1,6 +1,13 @@
 import { Card, CardNumber, CardTitle, Content, GridDashboardContainer, Header } from './styles'
 
-function GridDashboard() {
+type GridDashboardProps = {
+	played: number | 0;
+	totalWins: number | 0;
+	totalDraws: number | 0;
+	totalLoses: number | 0;
+}
+
+function GridDashboard({ played, totalWins, totalDraws, totalLoses }: GridDashboardProps) {
 	return (
 		<GridDashboardContainer>
 			<Header>Resultados durante a temporada</Header>
@@ -8,22 +15,22 @@ function GridDashboard() {
 
 				<Card>
 					<CardTitle>Total de jogos</CardTitle>
-					<CardNumber>25</CardNumber>
+					<CardNumber>{played}</CardNumber>
 				</Card>
 
 				<Card>
 					<CardTitle>Total de vitórias</CardTitle>
-					<CardNumber>15</CardNumber>
+					<CardNumber>{totalWins}</CardNumber>
 				</Card>
 
 				<Card>
 					<CardTitle>Total de empates</CardTitle>
-					<CardNumber>6</CardNumber>
+					<CardNumber>{totalDraws}</CardNumber>
 				</Card>
 
 				<Card>
 					<CardTitle>Total de derrotas</CardTitle>
-					<CardNumber>4</CardNumber>
+					<CardNumber>{totalLoses}</CardNumber>
 				</Card>
 
 			</Content>
