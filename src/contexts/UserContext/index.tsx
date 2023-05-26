@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from 'react';
+import { createContext, ReactNode, useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 
 import api from '../../service/api';
@@ -36,7 +36,6 @@ function UserContextProvider({ children }: UserContextProviderProps) {
 	const [countries, setCountries] = useState<CountryProps[] | []>([]);
 	const isAuthenticated = countries.length !== 0;
 
-
 	async function login(currentKey: string) {
 		if (!currentKey) return;
 
@@ -57,11 +56,14 @@ function UserContextProvider({ children }: UserContextProviderProps) {
 				});
 				setKey(currentKey);
 				setCountries(data.response);
+				localStorage.setItem('@Key', currentKey);
+				localStorage.setItem('@Countries', JSON.stringify(data.response));
 			}
 
 		} catch (error: any) {
-			console.log(error);
 			setKey('');
+			localStorage.clear();
+			console.log(error);
 
 			switch (error?.response?.status) {
 				case 404:
@@ -107,7 +109,19 @@ function UserContextProvider({ children }: UserContextProviderProps) {
 	function logout() {
 		setKey('');
 		setCountries([]);
+		localStorage.clear();
 	}
+
+	useEffect(() => {
+		const localKey = localStorage.getItem('@Key');
+		const localCountries = localStorage.getItem('@Countries');
+
+		if (localKey && localCountries) {
+			setKey(localKey);
+			setCountries(JSON.parse(localCountries));
+		}
+
+	}, [])
 
 	return (
 		<UserContext.Provider value={{ key, countries, isAuthenticated, login, logout }}>

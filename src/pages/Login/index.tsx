@@ -34,6 +34,7 @@ function Login() {
 			login(currentKey);
 		} catch (error) {
 			console.log(error);
+			setCurrentKey('');
 		}
 	}
 
