@@ -44,6 +44,12 @@ type TeamProps = {
 	logo?: string;
 }
 
+type PlayersProps = {
+	name: string;
+	age: string;
+	photo: string;
+	nationality: string;
+}
 
 function Home() {
 	const [country, setCountry] = useState<CountryProps | null>(null);
@@ -56,6 +62,7 @@ function Home() {
 	const [seasons, setSeasons] = useState<OptionsProps[] | []>([]);
 	const [leagues, setLeagues] = useState<OptionsProps[] | []>([]);
 	const [teams, setTeams] = useState<OptionsProps[] | []>([]);
+	const [squad, setSquad] = useState<PlayersProps[] | []>([]);
 	const [statics, setStatics] = useState();
 
 	const { countries, key } = useContext(UserContext);
@@ -185,7 +192,33 @@ function Home() {
 
 
 	async function getPlayers() {
+		console.log('getPlayers');
+		try {
+			const { data } = await api.get('players', {
+				headers: {
+					'x-rapidapi-key': `${key}`,
+				},
+				params: {
+					team: team?.id,
+					season,
+				}
+			});
 
+			if (data.response?.length > 0) {
+				const players = data.response?.map((item: any) => ({
+					name: item?.player?.name,
+					age: item?.player?.age,
+					nationality: item?.player?.nationality,
+					photo: item?.player?.photo
+				}));
+
+				setSquad(players);
+
+			}
+
+		} catch (error) {
+			console.log(error);
+		}
 	}
 
 	useEffect(() => {
@@ -209,7 +242,7 @@ function Home() {
 
 	useEffect(() => {
 		if (team) {
-			getTeamStatics();
+			Promise.all([getTeamStatics(), getPlayers()]);
 		}
 	}, [team])
 
@@ -281,7 +314,7 @@ function Home() {
 				{!!team &&
 					<>
 						<ContainerPlayers>
-							{/* <CustomTable data={players} /> */}
+							<CustomTable data={squad} />
 							<LineUps nameImage={`${mostUsedLineup}`} />
 						</ContainerPlayers>
 

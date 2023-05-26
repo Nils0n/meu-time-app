@@ -1,14 +1,15 @@
 import { DivWrapper, TableCustom, TbodyCustom, TheadCustom } from './styles';
 
 
-type PlayerProps = {
+type PlayersProps = {
 	name: string;
-	age: number;
+	age: string;
+	photo: string;
 	nationality: string;
 }
 
 type CustomTableProps = {
-	data?: PlayerProps[];
+	data?: PlayersProps[];
 }
 
 function CustomTable({ data }: CustomTableProps) {
@@ -17,6 +18,7 @@ function CustomTable({ data }: CustomTableProps) {
 			<TableCustom>
 				<TheadCustom>
 					<tr>
+						<th>Foto</th>
 						<th>Nome</th>
 						<th>Idade</th>
 						<th>Nacionalidade</th>
@@ -26,6 +28,9 @@ function CustomTable({ data }: CustomTableProps) {
 					{data && data.length > 0 && (
 						data?.map((player, key) => (
 							<tr key={key}>
+								<td>
+									<img src={player.photo} alt="Foto jogador" style={{ width: '3rem', height: '3rem', borderRadius: '50%' }} />
+								</td>
 								<td>{player.name}</td>
 								<td>{player.age}</td>
 								<td>{player.nationality}</td>
