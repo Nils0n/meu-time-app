@@ -7,6 +7,8 @@ type CountryProps = {
 	name: string;
 	code?: string;
 	flag?: string;
+	value?: string;
+	label: string;
 }
 
 

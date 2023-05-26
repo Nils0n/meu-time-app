@@ -1,6 +1,8 @@
 import { useContext, useState, useEffect } from 'react';
+import { AiOutlineClear } from 'react-icons/ai';
 import Select from 'react-select';
 import { BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Bar } from 'recharts';
+import CustomButton from '../../components/CustomButton';
 
 import CustomTable from '../../components/CustomTable';
 import GridDashboard from '../../components/GridDashboard';
@@ -9,26 +11,24 @@ import { UserContext } from '../../contexts/UserContext';
 import api from '../../service/api';
 import Colors from '../../theme/theme.colors';
 
-import { ContainerPlayers, ContainerSelects, Flag, HomeContainer, HomeContent, ItemSelect } from './styles';
+import { ContainerButton, ContainerPlayers, ContainerSelects, Flag, HomeContainer, HomeContent, ItemSelect } from './styles';
 
 type CountryProps = {
-	name: string;
+	name?: string;
 	code?: string;
 	flag?: string;
+	value: string;
+	label?: string;
 }
 
-type OptionsProps = {
-	value: string | number;
-	label: string | number;
-	id?: string;
-	code?: string;
-	name?: string;
-	type?: string;
-	logo?: string;
+type SeasonProps = {
+	value: string;
+	label: string;
 }
 
 type LeagueProps = {
 	value: string;
+	label: string;
 	id: string;
 	name: string;
 	type: string;
@@ -51,19 +51,37 @@ type PlayersProps = {
 	nationality: string;
 }
 
+type LineUpProps = {
+	formation: string;
+	played: number;
+}
+
+type FixturesProps = {
+	draws: { total: number | undefined };
+	loses: { total: number | undefined };
+	played: { total: number | undefined };
+	wins: { total: number | undefined };
+}
+
+type StaticProps = {
+	fixtures?: FixturesProps | undefined;
+
+
+}
+
 function Home() {
 	const [country, setCountry] = useState<CountryProps | null>(null);
 	const [league, setLeague] = useState<LeagueProps | null>(null);
 	const [team, setTeam] = useState<TeamProps | null>(null);
-	const [season, setSeason] = useState<string | null>(null);
+	const [season, setSeason] = useState<SeasonProps | null>(null);
 	const [mostUsedLineup, setMostUsedLineUp] = useState<string>('');
 	const [dataDashboard, setDataDashboard] = useState();
 
-	const [seasons, setSeasons] = useState<OptionsProps[] | []>([]);
-	const [leagues, setLeagues] = useState<OptionsProps[] | []>([]);
-	const [teams, setTeams] = useState<OptionsProps[] | []>([]);
+	const [seasons, setSeasons] = useState([]);
+	const [leagues, setLeagues] = useState([]);
+	const [teams, setTeams] = useState([]);
 	const [squad, setSquad] = useState<PlayersProps[] | []>([]);
-	const [statics, setStatics] = useState();
+	const [statics, setStatics] = useState<StaticProps>();
 
 	const { countries, key } = useContext(UserContext);
 
@@ -98,7 +116,7 @@ function Home() {
 				},
 				params: {
 					country: country?.name,
-					season
+					season: season?.value
 				}
 			});
 
@@ -129,7 +147,7 @@ function Home() {
 				params: {
 					country: country?.name,
 					league: league?.id,
-					season,
+					season: season?.value
 				}
 			});
 
@@ -160,7 +178,7 @@ function Home() {
 				params: {
 					league: league?.id,
 					team: team?.id,
-					season,
+					season: season?.value
 				}
 			});
 
@@ -177,7 +195,7 @@ function Home() {
 
 			if (data.response?.lineups?.length > 0) {
 				const lineups = data.response?.lineups?.reduce(
-					(accuMulator, currentValue) => accuMulator?.played < currentValue?.played ? currentValue : accuMulator
+					(accuMulator: LineUpProps, currentValue: LineUpProps) => accuMulator?.played < currentValue?.played ? currentValue : accuMulator
 				);
 
 				setMostUsedLineUp(lineups?.formation);
@@ -192,7 +210,6 @@ function Home() {
 
 
 	async function getPlayers() {
-		console.log('getPlayers');
 		try {
 			const { data } = await api.get('players', {
 				headers: {
@@ -200,7 +217,7 @@ function Home() {
 				},
 				params: {
 					team: team?.id,
-					season,
+					season: season?.value
 				}
 			});
 
@@ -221,14 +238,30 @@ function Home() {
 		}
 	}
 
+	function cleared() {
+		setCountry(null);
+		setSeason(null);
+		setLeague(null);
+		setTeam(null);
+		setMostUsedLineUp('');
+		setDataDashboard(undefined);
+		setStatics({});
+		setSquad([]);
+	}
+
 	useEffect(() => {
 		if (country) {
+			setSeason(null);
+			setLeague(null);
+			setTeam(null);
 			getSeansons();
 		}
 	}, [country])
 
 	useEffect(() => {
 		if (country && season) {
+			setLeague(null);
+			setTeam(null);
 			getLeagues();
 		}
 	}, [country, season])
@@ -236,32 +269,41 @@ function Home() {
 
 	useEffect(() => {
 		if (country && season && league) {
+			setTeam(null);
 			getTeams();
 		}
-	}, [country, season, league])
+	}, [league])
 
 	useEffect(() => {
 		if (team) {
+			setMostUsedLineUp('');
+			setDataDashboard(undefined);
+			setStatics({});
+			setSquad([]);
 			Promise.all([getTeamStatics(), getPlayers()]);
 		}
 	}, [team])
 
-	useEffect(() => { console.log(statics) }, [statics])
-
 	return (
 		<HomeContainer>
 			<HomeContent>
+
 				<ContainerSelects>
 
 					<ItemSelect>
 						<label>Selecione o País</label>
 						<Select
+							placeholder="País..."
+							value={country}
 							options={optionsCountries}
 							onChange={e =>
 								setCountry({
+									value: `${e?.value}`,
+									label: `${e?.label}`,
 									name: `${e?.value}`,
 									code: `${e?.code}`,
-									flag: `${e?.flag}`
+									flag: `${e?.flag}`,
+
 								})}
 						/>
 						<Flag backgroundimage={`${country?.flag}`} />
@@ -270,20 +312,25 @@ function Home() {
 					<ItemSelect>
 						<label>Selecione a temporada</label>
 						<Select
+							placeholder="Temporada..."
 							options={seasons}
-							onChange={e => setSeason(`${e?.value}`)}
+							value={season}
+							onChange={e => setSeason(e)}
 						/>
 						<Flag>
-							{season}
+							{season?.label}
 						</Flag>
 					</ItemSelect>
 
 					<ItemSelect>
 						<label>Selecione a liga</label>
 						<Select
+							placeholder="Liga..."
 							options={leagues}
+							value={league}
 							onChange={e => setLeague({
 								value: `${e?.value}`,
+								label: `${e?.label}`,
 								id: `${e?.id}`,
 								name: `${e?.name}`,
 								type: `${e?.type}`,
@@ -296,7 +343,9 @@ function Home() {
 					<ItemSelect>
 						<label>Selecione o Time</label>
 						<Select
+							placeholder="Time..."
 							options={teams}
+							value={team}
 							onChange={e => setTeam({
 								id: `${e?.id}`,
 								value: `${e?.id}`,
@@ -308,7 +357,9 @@ function Home() {
 						/>
 						<Flag backgroundimage={team?.logo} />
 					</ItemSelect>
-
+					<ContainerButton onClick={cleared}>
+						<AiOutlineClear size={24} />
+					</ContainerButton>
 				</ContainerSelects>
 
 				{!!team &&
@@ -335,12 +386,12 @@ function Home() {
 							</BarChart>
 
 							<GridDashboard
-
 								played={statics?.fixtures?.played?.total}
 								totalDraws={statics?.fixtures?.draws?.total}
 								totalLoses={statics?.fixtures?.loses?.total}
 								totalWins={statics?.fixtures?.wins?.total}
 							/>
+
 						</ContainerPlayers>
 					</>
 				}

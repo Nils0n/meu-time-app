@@ -80,4 +80,17 @@ export const Flag = styled.div<FlagProps>`
 
 `;
 
+export const ContainerButton = styled.div`
+	position: relative;
+	left: 0;
+	width: 3rem;
+	height: 2.8rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius:100%;
+	background: ${Colors.background.blue};
+	color: ${Colors.text.white};
+	cursor: pointer;
 
+`

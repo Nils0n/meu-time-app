@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { ContainerImage, ContainerLineUps, HeaderLineUps } from "./styles";
 
 type LineUpsProps = {
@@ -6,7 +5,6 @@ type LineUpsProps = {
 }
 
 function LineUps({ nameImage }: LineUpsProps) {
-	useEffect(() => { console.log('nameIma', nameImage) }, [nameImage])
 
 	return (
 		<ContainerLineUps>
