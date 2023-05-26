@@ -12,6 +12,7 @@ export const HeaderContainer = styled.div`
 	display: flex;
 	justify-content: space-between;
 	position: fixed;
+	z-index:999;
 `;
 
 export const HeaderTitle = styled.h2`
