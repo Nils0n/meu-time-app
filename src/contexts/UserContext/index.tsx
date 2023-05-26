@@ -36,7 +36,7 @@ export const UserContext = createContext<UserContextProps>({
 function UserContextProvider({ children }: UserContextProviderProps) {
 	const [key, setKey] = useState('');
 	const [countries, setCountries] = useState<CountryProps[] | []>([]);
-	const isAuthenticated = countries.length !== 0;
+	const isAuthenticated = countries.length > 0;
 
 	async function login(currentKey: string) {
 		if (!currentKey) return;
