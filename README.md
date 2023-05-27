@@ -33,6 +33,10 @@ https://api-football-v1.p.rapidapi.com/v3/
 
 ---
 
+## 🌎 Deployed
+<p>Deploy realizado na vercel.</p>
+
+<a href="https://meu-time-app-eight.vercel.app">https://meu-time-app-eight.vercel.app</a>  🚀
 
 ## ⚙ Stacks utilizadas
 
@@ -70,7 +74,7 @@ Clone o projeto
 
 
 ```bash
-  git clone
+  git clone https://github.com/Nils0n/meu-time-app.git
 ```
 
 Entre no diretório do projeto
@@ -124,7 +128,7 @@ Acesse a url <a href="http://localhost:5173/">http://localhost:5173/</a> e desfr
 
 ---
 
-## Screenshots
+## Screenshots📸
 
 ![image](https://github.com/Nils0n/meu-time-app/assets/18104883/07009e52-ea46-487c-af3a-f0466d24cf52)
 ![image](https://github.com/Nils0n/meu-time-app/assets/18104883/52ea83b4-1a3f-4036-95d7-fe32273b5951)
