@@ -287,7 +287,11 @@ function Home() {
 	return (
 		<HomeContainer>
 			<HomeContent>
-
+				<ContainerButton onClick={cleared}>
+					<button title='Limpar filtros'>
+						<AiOutlineClear size={24} />
+					</button>
+				</ContainerButton>
 				<ContainerSelects>
 
 					<ItemSelect>
@@ -357,9 +361,7 @@ function Home() {
 						/>
 						<Flag backgroundimage={team?.logo} />
 					</ItemSelect>
-					{/* <ContainerButton onClick={cleared}>
-						<AiOutlineClear size={24} />
-					</ContainerButton> */}
+
 				</ContainerSelects>
 
 				{true &&
