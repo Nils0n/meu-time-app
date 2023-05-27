@@ -12,11 +12,6 @@ export const HomeContainer = styled.div`
 	margin-top:3rem;
 	padding-top:2rem;
   justify-content: center;
-
-	/* @media screen and (max-width: 600px) {
-    margin-top: -3rem;
-  } */
-
 `;
 
 export const HomeContent = styled.div`
@@ -52,9 +47,11 @@ export const ContainerSelects = styled.div`
 	gap:2rem;
 	margin-bottom:3rem;
 
-	@media screen and (max-width: 600px) {
+	@media screen and (max-width: 768px) {
     gap:4rem;
   }
+
+
 `;
 
 export const ContainerPlayers = styled.div`
@@ -141,14 +138,12 @@ export const ContainerDash = styled.div`
 	margin-top:10rem;
 
 		@media only screen and (min-width: 768px){
-			width: 70%;
 			padding-right:2rem;
 			height: 80rem;
 			margin-top:0;
 		}
 
 		@media only screen and (min-width: 992px){
-			width: 100%;
 			padding-right:2rem;
 		}
 `;

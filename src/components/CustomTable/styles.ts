@@ -17,19 +17,19 @@ export const DivWrapper = styled.div`
     -layout: fixed;
     border-radius: 8px;
 
-		@media screen and (max-width: 600px) {
+		/* @media screen and (max-width: 600px) {
 			width: 100%;
 		}
 
 		@media only screen and (min-width: 768px){
-			width: 70%;
+			width: 100%;
 			padding-right:2rem;
 		}
 
 		@media only screen and (min-width: 992px){
 			width: 100%;
 			padding-right:2rem;
-		}
+		} */
 
 
 

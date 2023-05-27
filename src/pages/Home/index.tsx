@@ -364,7 +364,7 @@ function Home() {
 
 				</ContainerSelects>
 
-				{true &&
+				{!!team &&
 					<>
 						<ContainerPlayers>
 							<CustomTable data={squad} />

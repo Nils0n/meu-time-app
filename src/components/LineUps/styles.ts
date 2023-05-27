@@ -4,12 +4,6 @@ import Colors from '../../theme/theme.colors';
 export const ContainerLineUps = styled.div`
 	height: 20rem;
 
-	@media only screen and (min-width:600){
-		margin-bottom:50rem;
-		background: red;
-		display: none;
-	}
-
 	@media only screen and (min-width: 768px){
 		width: 60%;
 	}
@@ -28,7 +22,7 @@ export const HeaderLineUps = styled.div`
 	justify-content: center;
 
 	@media only screen and (min-width: 768px){
-		width: 22rem;
+		width: 100%;
 	}
 
 `;
@@ -48,7 +42,7 @@ export const ContainerImage = styled.div`
 
 
 		@media only screen and (min-width: 768px){
-			width: 20rem;
+			width: 100%;
 			height: 10rem;
 		}
 	}
