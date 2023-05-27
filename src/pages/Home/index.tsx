@@ -2,7 +2,6 @@ import { useContext, useState, useEffect } from 'react';
 import { AiOutlineClear } from 'react-icons/ai';
 import Select from 'react-select';
 import { ResponsiveContainer, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Bar } from 'recharts';
-import CustomButton from '../../components/CustomButton';
 
 import CustomTable from '../../components/CustomTable';
 import GridDashboard from '../../components/GridDashboard';
