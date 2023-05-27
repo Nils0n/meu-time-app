@@ -21,6 +21,7 @@ https://api-football-v1.p.rapidapi.com/v3/
 
 
 * <a href="https://www.figma.com/file/8rDfrB89GmxKBT2jgtZ67F/Flowchart-app-Meu-Time?type=whiteboard&node-id=0%3A1&t=YWsfFQBBk4x9u2Nt-1">Link</a>
+![image](https://github.com/Nils0n/meu-time-app/assets/18104883/5573e355-10d2-4d3f-bc17-d0e001696b03)
 
 ---
 
@@ -124,3 +125,9 @@ Acesse a url <a href="http://localhost:5173/">http://localhost:5173/</a> e desfr
 ---
 
 ## Screenshots
+
+![image](https://github.com/Nils0n/meu-time-app/assets/18104883/07009e52-ea46-487c-af3a-f0466d24cf52)
+![image](https://github.com/Nils0n/meu-time-app/assets/18104883/19f8175d-9fc9-4d10-9524-8644968bc7fa)
+![image](https://github.com/Nils0n/meu-time-app/assets/18104883/c17580bc-7b08-4a31-8e3f-db605a44edb2)
+![image](https://github.com/Nils0n/meu-time-app/assets/18104883/3ac02f20-1d10-4981-85b2-9a36331492ff)
+
