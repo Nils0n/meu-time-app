@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect } from 'react';
 import { AiOutlineClear } from 'react-icons/ai';
 import Select from 'react-select';
-import { BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Bar } from 'recharts';
+import { ResponsiveContainer, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Bar } from 'recharts';
 import CustomButton from '../../components/CustomButton';
 
 import CustomTable from '../../components/CustomTable';
@@ -11,7 +11,7 @@ import { UserContext } from '../../contexts/UserContext';
 import api from '../../service/api';
 import Colors from '../../theme/theme.colors';
 
-import { ContainerButton, ContainerPlayers, ContainerSelects, Flag, HomeContainer, HomeContent, ItemSelect } from './styles';
+import { ContainerButton, ContainerDash, ContainerPlayers, ContainerSelects, Flag, HomeContainer, HomeContent, ItemSelect } from './styles';
 
 type CountryProps = {
 	name?: string;
@@ -357,33 +357,33 @@ function Home() {
 						/>
 						<Flag backgroundimage={team?.logo} />
 					</ItemSelect>
-					<ContainerButton onClick={cleared}>
+					{/* <ContainerButton onClick={cleared}>
 						<AiOutlineClear size={24} />
-					</ContainerButton>
+					</ContainerButton> */}
 				</ContainerSelects>
 
-				{!!team &&
+				{true &&
 					<>
 						<ContainerPlayers>
 							<CustomTable data={squad} />
 							<LineUps nameImage={`${mostUsedLineup}`} />
 						</ContainerPlayers>
 
-
 						<ContainerPlayers>
-
-							<BarChart
-								width={540}
-								height={350}
-								data={dataDashboard}
-							>
-								<CartesianGrid strokeDasharray="3 3" />
-								<XAxis dataKey="name" />
-								<YAxis />
-								<Tooltip />
-								<Legend />
-								<Bar dataKey="total" fill={Colors.background.blue} />
-							</BarChart>
+							<ContainerDash>
+								<ResponsiveContainer >
+									<BarChart
+										data={dataDashboard}
+									>
+										<CartesianGrid strokeDasharray="3 3" />
+										<XAxis dataKey="name" />
+										<YAxis />
+										<Tooltip />
+										<Legend />
+										<Bar dataKey="total" fill={Colors.background.blue} />
+									</BarChart>
+								</ResponsiveContainer>
+							</ContainerDash>
 
 							<GridDashboard
 								played={statics?.fixtures?.played?.total}
@@ -391,8 +391,8 @@ function Home() {
 								totalLoses={statics?.fixtures?.loses?.total}
 								totalWins={statics?.fixtures?.wins?.total}
 							/>
-
 						</ContainerPlayers>
+
 					</>
 				}
 			</HomeContent>

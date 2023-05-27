@@ -13,12 +13,16 @@ export const HomeContainer = styled.div`
 	padding-top:2rem;
   justify-content: center;
 
+	/* @media screen and (max-width: 600px) {
+    margin-top: -3rem;
+  } */
+
 `;
 
 export const HomeContent = styled.div`
 	height: 90%;
 	max-height:100vh;
-	width: 85%;
+	width: 100%;
 	max-width:65rem;
 	background:${Colors.text.white};
 	overflow: auto;
@@ -26,8 +30,19 @@ export const HomeContent = styled.div`
 	padding:2rem;
 
 	@media screen and (max-width: 600px) {
-    padding-bottom:2rem;
+    padding:1rem 0 3rem;
+		max-width:100%;
+		width: 95%;
+		background:${Colors.text.white};
+		display: flex;
+		flex-direction: column;
+		align-items: center;
   }
+
+	@media only screen and (min-width: 768px) {
+		width: 85%;
+	}
+
 `;
 
 export const ContainerSelects = styled.div`
@@ -37,7 +52,7 @@ export const ContainerSelects = styled.div`
 	gap:2rem;
 	margin-bottom:3rem;
 
-@media screen and (max-width: 600px) {
+	@media screen and (max-width: 600px) {
     gap:4rem;
   }
 `;
@@ -45,10 +60,21 @@ export const ContainerSelects = styled.div`
 export const ContainerPlayers = styled.div`
   margin-top: 5rem;
 	height: 20rem;
-	display: flex;
 	gap:2rem;
+	display: flex;
+	width: 60%;
 	flex-wrap: wrap;
-	justify-content: space-around;
+
+	@media screen and (max-width: 600px) {
+		width: 90%;
+  }
+
+	@media only screen and (min-width: 768px) {
+		width:60%;
+		display: flex;
+		flex-direction: column;
+	}
+
 
 `;
 
@@ -56,10 +82,15 @@ export const ItemSelect = styled.div`
 	height: 10rem;
 	width: 12rem;
 
+
 	& label{
 		font-size:1rem;
 		color:${Colors.text.dark};
 		font-weight:500;
+	}
+
+	@media screen and (max-width: 600px) {
+		width: 80%;
 	}
 `;
 
@@ -94,3 +125,21 @@ export const ContainerButton = styled.div`
 	cursor: pointer;
 
 `
+
+export const ContainerDash = styled.div`
+	width: 100%;
+	height: 20rem;
+	margin-top:10rem;
+
+		@media only screen and (min-width: 768px){
+			width: 70%;
+			padding-right:2rem;
+			height: 80rem;
+			margin-top:0;
+		}
+
+		@media only screen and (min-width: 992px){
+			width: 100%;
+			padding-right:2rem;
+		}
+`;

@@ -8,21 +8,29 @@ export const TableCustom = styled.table`
     text-align:start;
     border-collapse: separate;
     border-spacing: 0 15px;
-
-
-
 `;
 
 export const DivWrapper = styled.div`
     overflow-y: auto;
     max-height: 15rem;
-    width: 60%;
+    width: 100%;
     -layout: fixed;
     border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-		padding-right:2rem ;
+
+		@media screen and (max-width: 600px) {
+			width: 100%;
+		}
+
+		@media only screen and (min-width: 768px){
+			width: 70%;
+			padding-right:2rem;
+		}
+
+		@media only screen and (min-width: 992px){
+			width: 100%;
+			padding-right:2rem;
+		}
+
 
 
     th {
@@ -46,11 +54,10 @@ export const DivWrapper = styled.div`
 
 	&::-webkit-scrollbar-thumb {
 		border-radius: 10px;
-			margin-left: 10rem;
+		margin-left: 10rem;
 		background-color: ${Colors.background.blue};
+
 	}
-
-
 `;
 
 
@@ -59,31 +66,13 @@ export const TheadCustom = styled.thead`
     border-radius: 8px;
     color: ${Colors.text.white};
     height: 2.5rem;
-
-
-
-
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1); //(0px 4px 4px rgba(0, 0, 0, 0.1));
 
     th {
         font-size: 14px;
 				background: ${Colors.background.blue};
         font-weight: 600;
-       // width: 200px;
-
     }
-
-    th:nth-child(3){
-        //width: 500px;
-
-    }
-
-
-    th:nth-child(1){
-        //width: 300px;
-    }
-
-
 
     th:first-child{
         border-top-left-radius: 8px;
@@ -96,8 +85,7 @@ export const TheadCustom = styled.thead`
         border-bottom-right-radius: 8px;
     }
 
-
-    th {
+		th {
         text-align: start;
         padding: 0 1rem;
         }
