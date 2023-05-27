@@ -20,6 +20,6 @@ body {
 	background-size: cover;
 
 	@media screen and (max-width: 600px) {
-		height: 120%;
+		height: 110%;
 	}
 }
