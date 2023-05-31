@@ -132,7 +132,7 @@ Acesse a url <a href="http://localhost:5173/">http://localhost:5173/</a> e desfr
 
 ![image](https://github.com/Nils0n/meu-time-app/assets/18104883/07009e52-ea46-487c-af3a-f0466d24cf52)
 ![image](https://github.com/Nils0n/meu-time-app/assets/18104883/52ea83b4-1a3f-4036-95d7-fe32273b5951)
-![image](https://github.com/Nils0n/meu-time-app/assets/18104883/601a5084-1d1a-47c1-babd-ba92207d72e3)
+![image](https://github.com/Nils0n/meu-time-app/assets/18104883/3869552c-da6c-4da3-a9c6-0fb96926a7ac)
 
 
 
