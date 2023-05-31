@@ -98,13 +98,14 @@ export const Flag = styled.div<FlagProps>`
 	background-image: ${(props) => `url('${props?.backgroundimage}')`};
 	background-repeat: no-repeat;
 	background-position: center;
-	background-size: cover;
+	background-size: contain;
 	border-radius:10px;
 	font-weight: 900;
 	font-size:3rem;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	background-color: rgba(0, 0, 0, 0.275);
 
 `;
 
