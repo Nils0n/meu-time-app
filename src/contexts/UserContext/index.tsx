@@ -78,7 +78,7 @@ function UserContextProvider({ children }: UserContextProviderProps) {
 					});
 					break;
 				case 403:
-					toast.error('Você não está cadastrado na API Futeboll!', {
+					toast.error('Chave Key não encontrada!', {
 						position: "top-center",
 						autoClose: 2000,
 						closeOnClick: true,
