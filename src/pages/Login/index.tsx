@@ -11,14 +11,17 @@ import CustomInput from '../../components/CustomInput';
 import { LoginContainer, LoginHeadline, LoginInputContainer, LoginSubtitle, LoginContent } from './styles';
 import { UserContext } from '../../contexts/UserContext';
 import { toast } from 'react-toastify';
+import Loading from '../../components/Loading';
 
 function Login() {
 	const [currentKey, setCurrentKey] = useState('');
+	const [isLoading, setIsLoading] = useState(false);
 	const { login, isAuthenticated } = useContext(UserContext);
 	const navigate = useNavigate();
 
 	async function onSubmit() {
 		try {
+			setIsLoading(true);
 
 			if (currentKey.trim() === '') {
 				toast.warning('Informe a key!', {
@@ -31,10 +34,13 @@ function Login() {
 				return;
 			}
 
-			login(currentKey);
+			await login(currentKey);
+
 		} catch (error) {
 			console.log(error);
 			setCurrentKey('');
+		} finally {
+			setIsLoading(false);
 		}
 	}
 
@@ -46,6 +52,7 @@ function Login() {
 
 	return (
 		<>
+			{isLoading && <Loading />}
 			<LoginContainer>
 				<LoginContent>
 

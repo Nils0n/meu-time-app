@@ -14,7 +14,7 @@ type CountryProps = {
 
 type UserContextProps = {
 	key: string;
-	login: (key: string) => void;
+	login: (key: string) => Promise<void>;
 	logout: () => void;
 	countries: CountryProps[] | [];
 	isAuthenticated: boolean;
@@ -26,7 +26,7 @@ type UserContextProviderProps = {
 
 export const UserContext = createContext<UserContextProps>({
 	key: '',
-	login: (currentKey) => ({}),
+	login: () => Promise.resolve(),
 	logout: () => ({}),
 	countries: [],
 	isAuthenticated: false
@@ -58,8 +58,8 @@ function UserContextProvider({ children }: UserContextProviderProps) {
 				});
 				setKey(currentKey);
 				setCountries(data.response);
-				localStorage.setItem('@Key', currentKey);
-				localStorage.setItem('@Countries', JSON.stringify(data.response));
+				localStorage.setItem('@Meu-time:Key', currentKey);
+				localStorage.setItem('@Meu-time:Countries', JSON.stringify(data.response));
 			}
 
 		} catch (error: any) {
@@ -78,7 +78,7 @@ function UserContextProvider({ children }: UserContextProviderProps) {
 					});
 					break;
 				case 403:
-					toast.error('Você não está cadastrado na API Futeboll!', {
+					toast.error('Chave Key não encontrada!', {
 						position: "top-center",
 						autoClose: 2000,
 						closeOnClick: true,
@@ -115,8 +115,8 @@ function UserContextProvider({ children }: UserContextProviderProps) {
 	}
 
 	useEffect(() => {
-		const localKey = localStorage.getItem('@Key');
-		const localCountries = localStorage.getItem('@Countries');
+		const localKey = localStorage.getItem('@Meu-time:Key');
+		const localCountries = localStorage.getItem('@Meu-time:Countries');
 
 		if (localKey && localCountries) {
 			setKey(localKey);
