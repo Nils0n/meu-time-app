@@ -57,6 +57,7 @@ https://api-football-v1.p.rapidapi.com/v3/
  * <a href="https://react-select.com/home">React Select 🔎</a>
  * <a href="https://react-icons.github.io/react-icons/">React Icons 😁</a>
  * <a href="https://fkhadra.github.io/react-toastify/introduction">React toastify✅</a>
+ * <a href="https://www.davidhu.io/react-spinners/">React Spinners 🔄</a>
 
 ---
 
