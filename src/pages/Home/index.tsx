@@ -6,6 +6,7 @@ import { ResponsiveContainer, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Le
 import CustomTable from '../../components/CustomTable';
 import GridDashboard from '../../components/GridDashboard';
 import LineUps from '../../components/LineUps';
+import Loading from '../../components/Loading';
 import { UserContext } from '../../contexts/UserContext';
 import api from '../../service/api';
 import Colors from '../../theme/theme.colors';
@@ -69,6 +70,7 @@ type StaticProps = {
 }
 
 function Home() {
+	const [isLoading, setIsLoading] = useState(false);
 	const [country, setCountry] = useState<CountryProps | null>(null);
 	const [league, setLeague] = useState<LeagueProps | null>(null);
 	const [team, setTeam] = useState<TeamProps | null>(null);
@@ -170,6 +172,7 @@ function Home() {
 
 	async function getTeamStatics() {
 		try {
+			setIsLoading(true);
 			const { data } = await api.get('teams/statistics', {
 				headers: {
 					'x-rapidapi-key': `${key}`,
@@ -204,6 +207,8 @@ function Home() {
 
 		} catch (error) {
 			console.log(error);
+		} finally {
+			setIsLoading(false);
 		}
 	}
 
@@ -285,6 +290,7 @@ function Home() {
 
 	return (
 		<HomeContainer>
+			{isLoading && <Loading />}
 			<HomeContent>
 				<ContainerButton onClick={cleared}>
 					<button title='Limpar filtros'>
