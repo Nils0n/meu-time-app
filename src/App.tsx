@@ -1,10 +1,11 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 import { useContext } from "react";
 import { ToastContainer } from "react-toastify"
 
 import Header from "./components/Header"
 import Home from "./pages/Home"
 import Login from "./pages/Login"
+import NotFound from "./pages/NotFound";
 import PrivateRoute from "./utils/PrivateRoute";
 import { UserContext } from "./contexts/UserContext";
 
@@ -24,6 +25,9 @@ function App() {
 				<Route element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
 					<Route path="/" element={<Home />} />
 				</Route>
+
+				<Route path="*" element={<Navigate to="/not-found" />} />
+				<Route path="/not-found" element={<NotFound />} />
 
 			</Routes>
 		</BrowserRouter>
